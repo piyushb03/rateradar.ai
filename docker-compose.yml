@@ -1,0 +1,13 @@
+services:
+  rateradar:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rateradar-app
+    ports:
+      - "8000:8000"
+    environment:
+      - HOST=0.0.0.0
+      - PORT=8000
+      - ANOMALY_THRESHOLD_PCT=10.0
+    restart: unless-stopped
