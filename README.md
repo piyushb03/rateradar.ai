@@ -52,27 +52,38 @@ Freight procurement and finance operations teams manage thousands of multi-lane 
 ### Screenshot Gallery Placeholders
 
 #### 3.1 Executive Overview & Freight Intelligence Hero
-![RateRadar Executive Overview](screenshots/01_overview_dashboard.png)
+![RateRadar Executive Overview](s<img width="959" height="497" alt="image" src="https://github.com/user-attachments/assets/aa712807-9035-44a1-a261-c96d19448b22" />
+
+<img width="938" height="398" alt="image" src="https://github.com/user-attachments/assets/535ecfbc-cac4-4ee6-abc1-05eae5b277b7" />
+
+<img width="947" height="433" alt="image" src="https://github.com/user-attachments/assets/7de4605a-3639-4b1c-9d96-c24fd27f12c4" />
+
+)
 *Figure 1: Executive Overview dashboard with 6-corridor quick jump navigation chips, fleet average cost-per-tonne-km trend line, and auditable metrics.*
 
 #### 3.2 Priority Unexplained Rate Spikes
-![Priority Unexplained Rate Spikes](screenshots/02_priority_rate_spikes.png)
+![Priority Unexplained Rate Spikes](<img width="959" height="503" alt="image" src="https://github.com/user-attachments/assets/e0732b7a-787c-490a-aa14-11b813d4bdf5" />
+)
 *Figure 2: Priority unexplained anomaly queue highlighting rate increases (>10%) against 8-week prior history and peer cohorts.*
 
 #### 3.3 Interactive Route Analysis & Deep-Dive Drawer
-![Interactive Route Analysis](screenshots/03_route_analysis.png)
+![Interactive Route Analysis](<img width="959" height="497" alt="image" src="https://github.com/user-attachments/assets/1524b4ba-f7a2-4192-afeb-20e164e2e9df" />
+)
 *Figure 3: Multi-column searchable route analysis table with slide-in historical comparison drawer and directional route integrity.*
 
 #### 3.4 Evidence Explorer & Note Justifications
-![Evidence Explorer](screenshots/04_evidence_explorer.png)
+![Evidence Explorer](<img width="954" height="500" alt="image" src="https://github.com/user-attachments/assets/094f8216-d740-41cc-9b22-fba562a743cb" />
+)
 *Figure 4: Transparency view over all 10 context notes with explicit justifications for rejected non-supporting notes.*
 
 #### 3.5 Analysis Execution & 9/9 Evaluation Harness
-![Run Report and Evaluation](screenshots/05_run_report_evaluation.png)
+![Run Report and Evaluation](<img width="959" height="499" alt="image" src="https://github.com/user-attachments/assets/485805aa-c947-4c9b-8ec7-94835331110d" />
+)
 *Figure 5: Configurable threshold runner, 9/9 automated evaluation checks passing, and instant assessment CSV download.*
 
 #### 3.6 Grounded Natural-Language Freight Assistant
-![Verifiable Freight Assistant](screenshots/06_freight_assistant.png)
+![Verifiable Freight Assistant](<img width="959" height="498" alt="image" src="https://github.com/user-attachments/assets/48af1a19-c1f8-4ad8-b525-7f0f500d21ce" />
+)
 *Figure 6: Intent-grounded conversational assistant answering route surge and peer comparison queries with zero hallucination.*
 
 ---
