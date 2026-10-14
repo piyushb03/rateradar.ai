@@ -1,7 +1,6 @@
 # RateRadar — Freight Cost Intelligence
 
 > **"See the signals behind every freight-rate change."**  
-> Complete implementation for the FreightTiger Software Engineering Intern Assessment.
 
 [![Reproducibility](https://img.shields.io/badge/Reproducibility-100%25%20Bit--for--Bit%20(SHA--256)-success)]()
 [![Evaluation](https://img.shields.io/badge/Evaluation%20Harness-9%2F9%20Passed-success)]()
