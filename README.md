@@ -6,7 +6,6 @@
 [![Evaluation](https://img.shields.io/badge/Evaluation%20Harness-9%2F9%20Passed-success)]()
 [![Tests](https://img.shields.io/badge/Pytest-27%2F27%20Passed-success)]()
 [![LLM Cost](https://img.shields.io/badge/LLM%20Cost-%240.00%20(0%20Calls)-blue)]()
-[![License](https://img.shields.io/badge/License-MIT-lightgrey)]()
 
 ---
 
@@ -36,20 +35,18 @@ Freight procurement and finance operations teams manage thousands of multi-lane 
 
 ## 3. Application Screenshots & Visual Tour
 
-> **Note for Evaluators:** Place screenshot images into the [`screenshots/`](screenshots/) directory using the filenames below to render them directly in this document.
-
-| Feature View | Screenshot Link | Core Purpose |
-| :--- | :--- | :--- |
-| **Executive Overview** | ![Executive Overview](screenshots/01_overview_dashboard.png) | High-level metrics, direct action CTAs, 6-corridor quick jump navigator, fleet cost trends |
-| **Priority Rate Spikes** | ![Priority Rate Spikes](screenshots/02_priority_rate_spikes.png) | Top unexplained rate spikes exceeding 10.0% threshold with compact baseline vs. peer hierarchy |
-| **Route Analysis Table** | ![Route Analysis](screenshots/03_route_analysis.png) | 728 route-week audit table with directional route separation, sorting, and historical drawer |
-| **Evidence Explorer** | ![Evidence Explorer](screenshots/04_evidence_explorer.png) | 10 context notes audit with match status, temporal scopes, and rejection reasons |
-| **Analysis Execution** | ![Run Report](screenshots/05_run_report_evaluation.png) | Anomaly threshold runner, 9/9 automated evaluation check transparency, and CSV export |
-| **Grounded Assistant** | ![Freight Assistant](screenshots/06_freight_assistant.png) | Deterministic Q&A grounded in calculated evidence with $0.00 external LLM costs |
+| Feature View | Core Purpose |
+| :--- | :--- |
+| **Executive Overview** | High-level metrics, direct action CTAs, 6-corridor quick jump navigator, fleet cost trends |
+| **Priority Rate Spikes** | Top unexplained rate spikes exceeding 10.0% threshold with compact baseline vs. peer hierarchy |
+| **Route Analysis Table** | 728 route-week audit table with directional route separation, sorting, and historical drawer |
+| **Evidence Explorer** | 10 context notes audit with match status, temporal scopes, and rejection reasons |
+| **Analysis Execution** | Anomaly threshold runner, 9/9 automated evaluation check transparency, and CSV export |
+| **Grounded Assistant** | Deterministic Q&A grounded in calculated evidence with $0.00 external LLM costs |
 
 ---
 
-### Screenshot Gallery Placeholders
+### Screenshot Gallery
 
 #### 3.1 Executive Overview & Freight Intelligence Hero
 ![RateRadar Executive Overview](s<img width="959" height="497" alt="image" src="https://github.com/user-attachments/assets/aa712807-9035-44a1-a261-c96d19448b22" />
@@ -197,29 +194,37 @@ Access the application at **`http://localhost:8000`**.
 
 ### 7.1 Directional Route Identity (§5.1)
 Routes are identified strictly by:
-$$\text{Internal Route Key} = \text{origin} \mid \text{destination} \mid \text{route\_type}$$
+```text
+Internal Route Key = origin | destination | route_type
+```
 - `origin` and `destination` are directional: `Mumbai-Pune` is strictly isolated from `Pune-Mumbai`.
 - Display and export format is `origin-destination`.
 - `route_type` is provided as Short, Medium, or Long.
 
 ### 7.2 Weekly Grouping Starting on Monday (§5.2)
 Weeks run Monday through Sunday:
-$$\text{week\_of} = \text{shipment\_date} - \text{weekday}(\text{shipment\_date})$$
+```text
+week_of = shipment_date - weekday(shipment_date)
+```
 - Formatted as `YYYY-MM-DD`.
 - Example: Wednesday `2025-02-26` belongs to Monday `2025-02-24`.
 - Correctly handles month and year boundaries.
 
 ### 7.3 Cost per Tonne-Kilometre Formula (§5.3)
 For each route-week:
-$$\text{cost\_per\_tonne\_km} = \frac{\sum \text{freight\_cost\_inr}}{\sum (\text{quantity\_tonnes} \times \text{distance\_km})}$$
+```text
+cost_per_tonne_km = SUM(freight_cost_inr) / SUM(quantity_tonnes * distance_km)
+```
 *Crucial:* Aggregations occur across the entire cohort first. We never calculate an unweighted mean of individual shipment-level ratios.
 
 ### 7.4 Rolling 8-Week Historical Baseline (§5.4)
-- **Window:** The 8 calendar weeks strictly preceding the current week: $[\text{week\_of} - 8\text{ weeks}, \text{week\_of})$.
+- **Window:** The 8 calendar weeks strictly preceding the current week: `[week_of - 8 weeks, week_of)`.
 - **No Look-Ahead:** Future weeks or current week data are never included.
 - **Limited History Policy:** If fewer than 8 preceding weeks are available, the average is computed across all available earlier weeks. If 0 prior observations exist (e.g. week 1), `own_history_avg` is set to `None` and reported as `N/A (no baseline available for this route's past average)`.
 - Percentage deviation:
-$$\text{vs\_own\_history} = \left(\frac{\text{current\_cost}}{\text{own\_history\_avg}} - 1\right) \times 100$$
+```text
+vs_own_history (%) = ((current_cost / own_history_avg) - 1) * 100
+```
 
 ### 7.5 Similar-Route Peer Baseline (§5.5)
 - **Peer Set:** Distinct routes in the *same week* that share the *same route_type*.
@@ -227,7 +232,9 @@ $$\text{vs\_own\_history} = \left(\frac{\text{current\_cost}}{\text{own\_history
 - **Metric:** Arithmetic mean of the route-level cost-per-tonne-km metrics of peer routes.
 - If no other routes exist for that route type in that week, reported as `N/A`.
 - Percentage deviation:
-$$\text{vs\_similar\_routes} = \left(\frac{\text{current\_cost}}{\text{peer\_avg}} - 1\right) \times 100$$
+```text
+vs_similar_routes (%) = ((current_cost / peer_avg) - 1) * 100
+```
 
 ---
 
@@ -235,7 +242,9 @@ $$\text{vs\_similar\_routes} = \left(\frac{\text{current\_cost}}{\text{peer\_avg
 
 ### 8.1 Configurable Threshold (§5.6)
 The default threshold is **10.0%**. A route-week is an anomaly candidate if:
-$$\text{own\_history\_pct} > 10.0\% \quad \text{OR} \quad \text{peer\_pct} > 10.0\%$$
+```text
+own_history_pct > 10.0%  OR  peer_pct > 10.0%
+```
 Missing baselines are not treated as zero. If neither baseline is available, the route is not flagged from lack of data alone.
 
 ### 8.2 The Flagged States (§5.7)
